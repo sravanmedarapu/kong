@@ -123,7 +123,11 @@ local function send_response(status_code)
     end
 
     ngx.status = status_code
-    ngx.header["Content-Type"] = "application/json; charset=utf-8"
+
+    if status_code ~= 204 then
+      ngx.header["Content-Type"] = "application/json; charset=utf-8"
+    end
+
     ngx.header["Server"] = server_header
 
     if headers then
